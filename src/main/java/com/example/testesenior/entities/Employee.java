@@ -18,17 +18,6 @@ import org.hibernate.annotations.ParamDef;
 
 @Entity
 @Table(name = "tb_employee")
-@FilterDef(
-	    name = "notExcludedEmployee",
-	    parameters = {	    		
-	    		@ParamDef(name = "hireDate", type = "java.time.LocalDateTime"),
-	    		@ParamDef(name = "dismissalDate", type = "java.time.LocalDateTime")
-	    }		
-	)
-@Filter(
-	    name = "notExcludedEmployee", 
-	    condition = " (hireDate >= dismissalDate or dismissalDate is null) "
-	)
 public class Employee implements Serializable {
 	private static final long serialVersionUID = 1L;
 
