@@ -69,4 +69,22 @@ public class EmployeeRepositoryTests {
 		Assertions.assertTrue(employees.getContent().stream()
 				.noneMatch(e -> e.getId().equals(excludedEmployee.getId())));
 	}
+	
+	@Test
+	public void findAllNotExcludedEmployeesShouldRetrieveCurrentEmployees() {
+		Pageable pageable = PageRequest.of(0, 10);
+		Page<EmployeeDTO> employees = repository.findAllNotExcludedEmployees(pageable);
+		
+		Assertions.assertTrue(employees.getContent().stream()
+				.anyMatch(e -> e.getId().equals(currentEmployee.getId())));
+	}
+	
+	@Test
+	public void findAllNotExcludedEmployeesShouldRetrieveDismissedEmployees() {
+		Pageable pageable = PageRequest.of(0, 10);
+		Page<EmployeeDTO> employees = repository.findAllNotExcludedEmployees(pageable);
+		
+		Assertions.assertTrue(employees.getContent().stream()
+				.anyMatch(e -> e.getId().equals(employeeDismissed.getId())));
+	}
 }
